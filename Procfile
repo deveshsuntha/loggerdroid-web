@@ -1,0 +1,1 @@
+web: java -jar target/attendance-recorder-web-0.0.1-SNAPSHOT.jar

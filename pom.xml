@@ -6,7 +6,6 @@
 	<groupId>in.heiti</groupId>
 	<artifactId>attendance-recorder-web</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 
 	<name>attendance-recorder-web</name>
 	<description>AttendanceRecorder</description>
