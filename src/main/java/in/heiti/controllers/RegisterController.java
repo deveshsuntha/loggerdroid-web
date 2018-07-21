@@ -49,5 +49,11 @@ public class RegisterController {
 		return regService.getTodaysLogs();
 	}
 	
+	@RequestMapping(method=RequestMethod.GET, value="/getEmployees")
+	public Iterable<Employee> getAllEmployees() {
+		
+		return empService.getAllEmployees();
+	}
+	
 
 }
