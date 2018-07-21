@@ -1,12 +1,12 @@
 package in.heiti.services;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.heiti.core.GenericResponse;
 import in.heiti.entity.Employee;
 import in.heiti.entity.Register;
 
@@ -19,7 +19,7 @@ public class RegisterService {
 	@Autowired
 	private EmployeeRepository employeeRepo;
 	
-	public boolean logAttendance(String fingerprint) {
+	public GenericResponse logAttendance(String fingerprint) {
 		
 		Employee emp = employeeRepo.findOneByFingerprint(fingerprint);
 		
@@ -33,18 +33,17 @@ public class RegisterService {
 				reg.setInTime(new Date());
 				reg.setLogDate(new Date());
 				registerRepo.save(reg);
-				return true;
+				return GenericResponse.status(true, "Swipe in registered");
 			} else {
 				
 				register.setOutTime(new Date());
 				registerRepo.save(register);
-				
+				return GenericResponse.status(true, "Swipe out registered");
 			}
 				
-			return true;
 			
 		} else
-		return false;
+		return GenericResponse.status(false, "Employee not registered");
 	}
 
 	public List<Register> getTodaysLogs() {

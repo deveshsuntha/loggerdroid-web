@@ -1,11 +1,11 @@
 package in.heiti.services;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.heiti.core.GenericResponse;
 import in.heiti.entity.Employee;
 
 @Service
@@ -14,8 +14,15 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepo;
 	
-	public void registerEmployee(Employee employee) {
-		employeeRepo.save(employee);
+	public GenericResponse registerEmployee(Employee employee) {
+		
+		if(employeeRepo.findOneByFingerprint(employee.getFingerprint())!=null)
+			return GenericResponse.status(false, "Employee already registered");
+		else {
+			employeeRepo.save(employee);
+			return GenericResponse.status(true, "Registered successfully");
+		}
+		
 	}
 	
 	public Employee getEmployeeFromId(int id) {

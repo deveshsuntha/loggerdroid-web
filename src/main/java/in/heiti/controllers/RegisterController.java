@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.heiti.core.GenericResponse;
 import in.heiti.entity.Employee;
 import in.heiti.entity.Register;
 import in.heiti.services.EmployeeService;
@@ -29,15 +30,14 @@ public class RegisterController {
 		return "hello";
 	}
 	@RequestMapping(method=RequestMethod.POST, value="/register")
-	public boolean registerEmployee(@RequestBody Employee emp) {
+	public GenericResponse registerEmployee(@RequestBody Employee emp) {
 		
-		empService.registerEmployee(emp);
-		return true;
+		return empService.registerEmployee(emp);
 	}
 	
 	
 	@RequestMapping(method=RequestMethod.POST, value="/log/{fingerprint}")
-	public boolean logAttendance(@PathVariable String fingerprint) {
+	public GenericResponse logAttendance(@PathVariable String fingerprint) {
 		
 		return regService.logAttendance(fingerprint);
 	}
